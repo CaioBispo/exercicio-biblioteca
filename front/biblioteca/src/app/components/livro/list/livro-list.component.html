@@ -1,0 +1,23 @@
+<input type="button" value="Cadastrar" [routerLink]="['/livro/create']" />
+
+<table>
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Categoria</th>
+            <th>Autor</th>
+            <th colspan="2">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let livro of livros | async">
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.autor.nome }}</td>
+            <td>{{ livro.categoria.descricao }}</td>
+            <td>
+                <a href="javascript:void(0)" [routerLink]="['/livro/create', livro.id]">Editar</a>
+                <a href="javascript:void(0)" (click)="excluir(livro.id)">Excluir</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

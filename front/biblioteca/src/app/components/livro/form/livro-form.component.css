@@ -1,0 +1,25 @@
+.erro {
+    color: red;
+}
+
+.erro :before {
+    content: '* ';
+}
+
+.erro :after {
+    content: ' *';
+}
+
+.erro > p {
+    margin-top: 1px;
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+
+.invalido {
+    border: 1px dashed red;
+}
+
+.valido {
+    border: 1px solid limegreen;
+}

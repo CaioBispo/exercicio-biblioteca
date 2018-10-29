@@ -1,0 +1,60 @@
+<div>
+
+  <form [formGroup]="formCadastro" (submit)="salvar(formCadastro.value)">
+    <fieldset>
+      <legend>Livro</legend>
+
+      <div>
+        <label for="titulo">Título</label> <br />
+        <input type="text" id="titulo" formControlName="titulo" (blur)="validarDuplicidade(formCadastro.value.titulo)"
+          [class.invalido]="formCadastro.controls.titulo.invalid && formCadastro.controls.titulo.touched"
+          [class.valido]="formCadastro.controls.titulo.valid && formCadastro.controls.titulo.touched" />
+        <div class="erro" *ngIf="formCadastro.controls.titulo.invalid && formCadastro.controls.titulo.touched">
+          <p *ngIf="formCadastro.controls.titulo.errors.required">Campo Obrigatório</p>
+          <p *ngIf="formCadastro.controls.titulo.errors.maxlength">Tamanho máximo de 200 caracteres</p>
+        </div>
+      </div>
+
+      <div>
+        <label for="data_publicacao">Data de Publicação</label> <br />
+        <input type="text" id="data_publicacao" formControlName="data_publicacao"
+          [class.invalido]="formCadastro.controls.data_publicacao.invalid && formCadastro.controls.data_publicacao.touched"
+          [class.valido]="formCadastro.controls.data_publicacao.valid && formCadastro.controls.data_publicacao.touched" />
+        <div class="erro" *ngIf="formCadastro.controls.data_publicacao.invalid && formCadastro.controls.data_publicacao.touched">
+          <p *ngIf="formCadastro.controls.data_publicacao.errors.required">Campo Obrigatório</p>
+          <p *ngIf="formCadastro.controls.data_publicacao.errors.pattern">Data no formato inválido</p>
+        </div>
+      </div>
+
+      <div formGroupName="categoria">
+        <label for="categoria">Categoria</label> <br />
+        <select id="categoria" formControlName="id"
+          [class.invalido]="formCadastro.controls.categoria.controls.id.invalid && formCadastro.controls.categoria.controls.id.touched"
+          [class.valido]="formCadastro.controls.categoria.controls.id.valid && formCadastro.controls.categoria.controls.id.touched">
+          <option value="">Selecione...</option>
+          <option *ngFor="let c of categorias" [value]="c.id">{{ c.descricao }}</option>
+        </select>
+        <div class="erro" *ngIf="formCadastro.controls.categoria.controls.id.invalid && formCadastro.controls.categoria.controls.id.touched">
+          <p *ngIf="formCadastro.controls.categoria.controls.id.errors.required">Campo Obrigatório</p>
+        </div>
+      </div>
+
+      <div formGroupName="autor">
+        <label for="autor">Autor</label> <br />
+        <select id="autor" formControlName="id"
+          [class.invalido]="formCadastro.controls.autor.controls.id.invalid && formCadastro.controls.autor.controls.id.touched"
+          [class.valido]="formCadastro.controls.autor.controls.id.valid && formCadastro.controls.autor.controls.id.touched">
+          <option value="">Selecione...</option>
+          <option *ngFor="let a of autores" [value]="a.id">{{ a.nome }}</option>
+        </select>
+        <div class="erro" *ngIf="formCadastro.controls.autor.controls.id.invalid && formCadastro.controls.autor.controls.id.touched">
+          <p *ngIf="formCadastro.controls.autor.controls.id.errors.required">Campo Obrigatório</p>
+        </div>
+      </div>
+
+    </fieldset>
+    <input type="button" value="Voltar" [routerLink]="['/livro/']" />
+    <input type="submit" value="Salvar" [disabled]="formCadastro.invalid" />
+  </form>
+
+</div>
